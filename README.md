@@ -1,6 +1,6 @@
 <div align="center"><h1>Web Scraper</h1></div>
 
-I have used amazon's url to scrape the details of mobile phones under 10000 INR. The details include:-
+- I have used amazon's url to scrape the details of mobile phones under 10000 INR. The details include:-
 1) Name of Phone
 2) Selling Price
 3) Actual MRP
