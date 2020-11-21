@@ -15,10 +15,12 @@ soup = BeautifulSoup(content,'html.parser')
 
 names = soup.find_all("span", class_="a-size-medium a-color-base a-text-normal")
 #print(names)
-phone_names = set()
+phone_details = list()
 count = 1
 for i in names:
     print(str(count) +". "+ i.string)
+
+    name = i.string
     #price = i.find_next("span", class_="a-price-whole")
     price_ = i.find_next("span", class_="a-price")
     #print(type(price_))
@@ -34,14 +36,26 @@ for i in names:
         mrp = "Not Mentioned"
     else:
         mrp = mrp.find("span", class_="a-offscreen").string
-    number_reviews = i.find_next("span", class_="a-size-base")
-    rating = i.find_next("span", class_="a-icon-alt")
+    number_reviews = i.find_next("span", class_="a-size-base").string
+    rating = i.find_next("span", class_="a-icon-alt").string
 
     print("Price :", price)
     print("MRP :", mrp)
-    print("Number of Reviews :", number_reviews.string)
-    print("Rating :", rating.string)
-    phone_names.add(i.string)
+    print("Number of Reviews :", number_reviews)
+    print("Rating :", rating)
+
+    details = dict()
+    details['Name'] = name
+    details['Price'] = price
+    details['MRP'] = mrp
+    details['Number of Reviews'] = number_reviews
+    details['Rating'] = rating
+
+    phone_details.append(details)
+
     count+=1
 
-#print(phone_names)
+print(phone_details)
+df = pd.DataFrame(phone_details)
+print(df)
+df.to_csv(r"phone-details.csv",index=True)
